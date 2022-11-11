@@ -1,0 +1,41 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+// 変数の定義
+// max-width
+$breakpoint-down: (
+    'sm': 'screen and (max-width: 400px)',
+    'md': 'screen and (max-width: 768px)',
+    'lg': 'screen and (max-width: 1000px)',
+    'xl': 'screen and (max-width: 1200px)',
+) !default;
+
+@mixin mq($breakpoint: md) {
+    @media #{map-get($breakpoint-down, $breakpoint)} {
+        @content;
+    }
+}
+
+.pc {
+    display: block;
+    @include mq() { // 引数を省略（初期値はmdの768px）
+        display: none;
+    }
+}
+
+.phone {
+    @include mq() { // 引数を省略（初期値はmdの768px）
+        margin-top: 3px;
+    }
+}
+
+img{
+    width: 100%;
+    height: auto;
+}

@@ -1,0 +1,20 @@
+<?php 
+return [
+    'Login' => 'ログイン',
+    'Logout' => 'ログアウト',
+    'Email Address' => 'メールアドレス',
+    'Password' => 'パスワード',
+    'Remember Me' => 'パスワードを記憶する',
+    'Register' => '新規登録',
+    'Name' => 'ユーザー名',
+    'Confirm Password' => '確認用パスワード',
+    'Forgot Your Password?' => 'パスワードを忘れた場合',
+    'Reset Password' => 'パスワードをリセット',
+    'Send Password Reset Link' => 'メールアドレスに送信',
+    'Please confirm your password before continuing.' => '続行する前にパスワードを確認してください。',
+    'Verify Your Email Address' => 'd',
+    'A fresh verification link has been sent to your email address.' => 'w',
+    'Before proceeding, please check your email for a verification link.' => 's',
+    'If you did not receive the email' => 'a',
+    'click here to request another' => 'e',
+];
