@@ -88,20 +88,52 @@ class ChatController extends Controller
     
     }
 
-    public static function chat(Request $request){
-
-        // $chat = new ChatMessage();
-        // $chat->chat_room_id = $request->chat_room_id;
-        // $chat->user_id = $request->user()->id;
-        // $chat->message = $request->message;
-        // $chat->save();
-
-        // event(new ChatPusher($chat));
-        return view('chat.message');
+    public function get()
+    {
+        return ChatMessage::with('user')->get();
     }
 
-    public function send(Request $request){
-        $user=User::find(Auth::id());
-        event(new ChatEvent($request->message,$user));
+    public function send(Request $request)
+    {
+        $user = Auth::user();
+
+        // $message = $user->messages()->create([
+        //     'message' => $request->input('message')
+        // ]);
+
+        //$chat_room_id = Auth::user();
+
+        //event(new ChatEvent($user, $message));
+
+        $chat = new ChatMessage();
+        $chat->chat_room_id = $request->chat_room_id;
+        $chat->user_id = $request->user()->id;
+        $chat->message = $request->message;
+        $chat->save();
+
+        return ['status' => 'Message Success!'];
     }
+
+    // public static function chat(Request $request){
+
+    //     // $user = Auth::user();
+
+    //     // $message = $user->messages()->create([
+    //     //     'message' => $request->input('message')
+    //     // ]);
+
+    //     $chat = new ChatMessage();
+    //     $chat->chat_room_id = $request->chat_room_id;
+    //     $chat->user_id = $request->user()->id;
+    //     $chat->message = $request->message;
+    //     $chat->save();
+
+    //     event(new ChatEvent($message,$user));
+    //     //return ['status' => 'Message Success!'];
+    // }
+
+    // public function send(Request $request){
+    //     $user=User::find(Auth::id());
+    //     event(new ChatEvent($request->message,$user));
+    // }
 }

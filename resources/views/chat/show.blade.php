@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', 'チャットルーム')
+@section('title', 'チャットルーム一覧')
 
 @section('content')
 <div class="bg-white vh-100">

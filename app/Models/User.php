@@ -106,7 +106,12 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Comment');
     }
 
-    public function chatMessages(): HasMany
+    // public function chatMessages(): HasMany
+    // {
+    //     return $this->hasMany('App\Models\ChatMessage');
+    // }
+
+    public function messages(): HasMany
     {
         return $this->hasMany('App\Models\ChatMessage');
     }

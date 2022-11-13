@@ -50,9 +50,11 @@ Route::post('/articles/{comment_id}', 'App\Http\Controllers\CommentsController@d
 Route::group(['prefix' => 'chat', 'middleware' => 'auth'], function () {
     Route::get('rooms', 'App\Http\Controllers\ChatController@rooms')->name('chat.rooms');
     Route::post('show', 'App\Http\Controllers\ChatController@show')->name('chat.show');
-    //Route::get('chat', 'App\Http\Controllers\ChatController@chat')->name('chat.chat');
-    Route::post('chat', 'App\Http\Controllers\ChatController@chat')->name('chat.chat'); 
+    // Route::get('messages', 'App\Http\Controllers\ChatController@get');//->name('chat.get');
+    // Route::post('messages', 'App\Http\Controllers\ChatController@chat')->name('chat.chat'); 
     //Route::get('send', [App\Http\Controllers\ChatController::class,'send']);
     // Route::get('chat', function(){return view('chat');});
+    Route::get('messages', [App\Http\Controllers\ChatController::class, 'get']);
+    Route::post('messages', [App\Http\Controllers\ChatController::class, 'send']);
 });
 Route::get('send', [App\Http\Controllers\ChatController::class,'send']);

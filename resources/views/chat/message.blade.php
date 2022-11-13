@@ -15,5 +15,8 @@
             @include('chat.room')
         </div>
     </div>
+    <div>
+        <p>message</p>
+    </div>
 </div>
 @endsection
