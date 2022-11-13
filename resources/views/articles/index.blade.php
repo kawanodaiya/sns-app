@@ -5,7 +5,7 @@
 @section('content')
 
 @include('nav')
-<div class="container">
+<div class="container container-position">
     @include('articles.select')
     @foreach($articles as $article)
     @include('articles.card')

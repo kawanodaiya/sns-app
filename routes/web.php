@@ -57,4 +57,5 @@ Route::group(['prefix' => 'chat', 'middleware' => 'auth'], function () {
     Route::get('messages', [App\Http\Controllers\ChatController::class, 'get']);
     Route::post('messages', [App\Http\Controllers\ChatController::class, 'send']);
 });
-Route::get('send', [App\Http\Controllers\ChatController::class,'send']);
+
+Route::get('/setting', 'App\Http\Controllers\SetController@settings')->name('set.setting');

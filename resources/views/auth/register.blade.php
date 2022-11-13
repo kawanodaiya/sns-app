@@ -14,7 +14,6 @@
             @include('error_card_list') 
             
             <div class="card-text">
-                {{--ここから--}}
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <div class="md-form">
@@ -36,7 +35,6 @@
                     </div>
                 <button class="btn btn-block bg-success text-white mt-2 mb-2" type="submit">ユーザー登録</button>
                 </form>
-                {{--ここまで--}}
 
                 <div class="mt-0">
                     <a href="{{ route('login') }}" class="card-text">ログインはこちら</a>

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-dark bg-success">
+<nav class="navbar navbar-expand navbar-dark bg-success fixed-top">
 
     <a class="navbar-brand" href="/"><i class="fas fa-chess-board mx-1"></i>CAGE</a>
 

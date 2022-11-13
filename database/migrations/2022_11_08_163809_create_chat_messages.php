@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->integer('chat_room_id');
             $table->integer('user_id');
-            $table->string('message');
+            $table->text('message');
             $table->timestamps();
         });
     }

@@ -27,10 +27,14 @@ class ArticleController extends Controller
         $statuses = Status::all();
         $user = Auth::user();
 
-        if($statuses){
-            $articles = Article::query()->whereIn('status_name',
-                Auth::user()->status()->pluck('name'))
-                ->orderBy('created_at','desc')->get();
+        try{
+            if($statuses != null){
+                $articles = Article::query()->whereIn('status_name',
+                    Auth::user()->status()->pluck('name'))
+                    ->orderBy('created_at','desc')->get();
+            }
+        }catch (\Exception $e){
+            return view('articles.index',compact('articles','statuses','user'));
         }
 
         return view('articles.index',compact('articles','statuses','user'));
@@ -44,26 +48,31 @@ class ArticleController extends Controller
         // 画像フォームでリクエストした画像を取得
         $img = $request->file('img_path');
         // storage > public > img配下に画像が保存される
-        if($img){        
-            $dir = 'image';
-            $file_name = $img->getClientOriginalName();
-            $img = InterventionImage::make($img);
-            $img->orientate();
-            $img->resize(
-                600,
-                null,
-                function ($constraint) {
-                    // 縦横比を保持したままにする
-                    $constraint->aspectRatio();
-                    // 小さい画像は大きくしない
-                    $constraint->upsize();
-                }
-            );
-            $request->file('img_path')->storeAs('public/' . $dir, $file_name);
-            $img->save('storage/' . $dir . '/' . $file_name);
-            $article->img_path = 'storage/' . $dir . '/' . $file_name;
-        }else{
-            $article->img_path = 'null';
+        try{
+            if($img){        
+                $dir = 'image';
+                $file_name = $img->getClientOriginalName();
+                $img = InterventionImage::make($img);
+                $img->orientate();
+                $img->resize(
+                    600,
+                    null,
+                    function ($constraint) {
+                        // 縦横比を保持したままにする
+                        $constraint->aspectRatio();
+                        // 小さい画像は大きくしない
+                        $constraint->upsize();
+                    }
+                );
+                $request->file('img_path')->storeAs('public/' . $dir, $file_name);
+                $img->save('storage/' . $dir . '/' . $file_name);
+                $article->img_path = 'storage/' . $dir . '/' . $file_name;
+            }else{
+                $article->img_path = 'null';
+            }
+        }catch (\Exception $e){
+
+            return redirect()->route('articles.index');
         }
 
         $article->save();

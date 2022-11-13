@@ -1,5 +1,5 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+// @import url('https://fonts.bunny.net/css?family=Nunito');
 
 // Variables
 @import 'variables';
@@ -35,6 +35,18 @@ $breakpoint-down: (
     }
 }
 
+.border-height{
+    height: calc(100vh - 55px);
+}
+
+.container-position{
+    margin-top: 56px;
+}
+
+.text-position{
+    text-align: center;
+}
+
 img{
     width: 100%;
     height: auto;
@@ -42,8 +54,4 @@ img{
 
 li{
     list-style: none;
-}
-
-.border-height{
-    height: calc(100vh - 55px);
 }

@@ -28,6 +28,7 @@ class ChatController extends Controller
             'follow_each' => $follow_each,
         ]);
     }
+    
     public static function show(Request $request){
     
         $user = $request->user();
@@ -72,11 +73,9 @@ class ChatController extends Controller
         
         // チャット相手のユーザー情報を取得
         $chat_room_user = User::findOrFail($follow_each_user_id);
-        //dd($chat_room_user);
     
         // チャット相手のユーザー名を取得(JS用)
         $chat_room_user_name = $chat_room_user->name;
-        //dd($chat_room_user_name);
     
         $chat_messages = ChatMessage::where('chat_room_id', $chat_room_id)
         ->orderby('created_at')
@@ -97,10 +96,6 @@ class ChatController extends Controller
     {
         $user = Auth::user();
 
-        // $message = $user->messages()->create([
-        //     'message' => $request->input('message')
-        // ]);
-
         //$chat_room_id = Auth::user();
 
         //event(new ChatEvent($user, $message));
@@ -110,6 +105,14 @@ class ChatController extends Controller
         $chat->user_id = $request->user()->id;
         $chat->message = $request->message;
         $chat->save();
+
+        // $message = $user->messages()->create([
+        //     'message' => $request->input('message')
+        // ]);
+
+        $message = $chat->message;
+
+        event(new ChatEvent($message, $user));
 
         return ['status' => 'Message Success!'];
     }

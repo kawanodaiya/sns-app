@@ -4,11 +4,11 @@
 
 @section('content')
 @include('nav')
-<div class="container">
+<div class="container container-position">
     <form method="POST" action="{{ route('users.update',['name' => $user->name]) }}">
     @csrf
-        <div class="user-name md-form">
-            <label>name</label>
+        <div class="user-name md-form pt-2">
+            <label class="pt-2">name</label>
             <input type="text" name="name" class="form-control" value="{{ old('name', $user->name) }}">
         </div>
 
