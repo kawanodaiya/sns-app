@@ -11,12 +11,10 @@
                 @include('chat.user')
             @endforeach
         </div>
+        <div class="border-end border-dark border-height"></div>
         <div class="chat col-md-9">
             @include('chat.room')
         </div>
-    </div>
-    <div>
-        <p>message</p>
     </div>
 </div>
 @endsection

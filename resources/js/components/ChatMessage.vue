@@ -40,19 +40,24 @@
 
 <template>
     <div>
+        <div class="d-flex flex-row">
+            <div class="w-100">
+                <input v-model="text" class="form-control" />
+            </div>
+            <div>
+                <button @click="postMessage" :disabled="!textExists" class="btn-sm shadow-none border border-success bg-success text-white p-1">
+            <i class="p-1 fa-lg fas fa-play"></i>
+        </button>
+            </div>
+        </div>
         <ul>
             <li v-for="(message, key) in messages" :key="key">
-                <strong>{{ message.user.name }}</strong>
-                {{ message.message }}
+                <div v-if="message.chat_room_id === chatRoomId">
+                    <strong>{{ message.user.name }}</strong>
+                    {{ message.message }}
+                </div>
             </li>
         </ul>
-        <!-- <form>
-        <input v-model="text" />
-        <input v-model="chat_room_id" type="hidden" />
-        <button @click="postMessage" :disabled="!textExists">Submit</button>
-        </form> -->
-        <input v-model="text" />
-        <button @click="postMessage" :disabled="!textExists">Submit</button>
         <p>{{chatRoomId}}</p>
     </div>
 </template>
