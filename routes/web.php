@@ -19,13 +19,23 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::prefix('login')->name('login.')->group(function () {
+    Route::get('/{provider}', 'App\Http\Controllers\Auth\LoginController@redirectToProvider')
+            ->name('{provider}');
+    Route::get('/{provider}/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback')
+            ->name('{provider}.callback');
+});
+
 Route::get('/', 'App\Http\Controllers\ArticleController@index')->name('articles.index');
-Route::get('/home', 'App\Http\Controllers\ArticleController@index')->name('articles.index');
-Route::resource('/articles', 'App\Http\Controllers\ArticleController')->except(['index','show'])->middleware('auth');
+//Route::get('/home', 'App\Http\Controllers\ArticleController@index')->name('articles.index');
+Route::resource('/articles', 'App\Http\Controllers\ArticleController')->except(['index','show'])
+        ->middleware('auth');
 Route::resource('/articles', 'App\Http\Controllers\ArticleController')->only(['show']);  
 Route::prefix('articles')->name('articles.')->group(function () {
-    Route::put('/{article}/like', 'App\Http\Controllers\ArticleController@like')->name('like')->middleware('auth');
-    Route::delete('/{article}/like', 'App\Http\Controllers\ArticleController@unlike')->name('unlike')->middleware('auth');
+    Route::put('/{article}/like', 'App\Http\Controllers\ArticleController@like')
+            ->name('like')->middleware('auth');
+    Route::delete('/{article}/like', 'App\Http\Controllers\ArticleController@unlike')
+            ->name('unlike')->middleware('auth');
 });
 
 Route::prefix('users')->name('users.')->group(function () {
@@ -41,7 +51,7 @@ Route::prefix('users')->name('users.')->group(function () {
     });
     Route::get('/{name}/statuses', 'App\Http\Controllers\StatusController@search')->name('statuses.search');
     Route::post('/{name}/statuses/sort', 'App\Http\Controllers\StatusController@sort')->name('statuses.sort');
-    Route::get('/{name}/statuses/sort', 'App\Http\Controllers\StatusController@sort')->name('statuses.sort');
+    //Route::get('/{name}/statuses/sort', 'App\Http\Controllers\StatusController@sort')->name('statuses.sort');
 });
 
 Route::post('/articles/{comment_id}/comments','App\Http\Controllers\CommentsController@store');
@@ -50,10 +60,6 @@ Route::post('/articles/{comment_id}', 'App\Http\Controllers\CommentsController@d
 Route::group(['prefix' => 'chat', 'middleware' => 'auth'], function () {
     Route::get('rooms', 'App\Http\Controllers\ChatController@rooms')->name('chat.rooms');
     Route::post('show', 'App\Http\Controllers\ChatController@show')->name('chat.show');
-    // Route::get('messages', 'App\Http\Controllers\ChatController@get');//->name('chat.get');
-    // Route::post('messages', 'App\Http\Controllers\ChatController@chat')->name('chat.chat'); 
-    //Route::get('send', [App\Http\Controllers\ChatController::class,'send']);
-    // Route::get('chat', function(){return view('chat');});
     Route::get('messages', [App\Http\Controllers\ChatController::class, 'get']);
     Route::post('messages', [App\Http\Controllers\ChatController::class, 'send']);
 });
