@@ -13,18 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
-Route::prefix('login')->name('login.')->group(function () {
-    Route::get('/{provider}', 'App\Http\Controllers\Auth\LoginController@redirectToProvider')
-            ->name('{provider}');
-    Route::get('/{provider}/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback')
-            ->name('{provider}.callback');
-});
+// Route::prefix('login')->name('login.')->group(function () {
+//     Route::get('/{provider}', 'App\Http\Controllers\Auth\LoginController@redirectToProvider')
+//             ->name('{provider}');
+//     Route::get('/{provider}/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback')
+//             ->name('{provider}.callback');
+// });
 
 Route::get('/', 'App\Http\Controllers\ArticleController@index')->name('articles.index');
 Route::get('/home', 'App\Http\Controllers\ArticleController@index')->name('articles.index');
@@ -45,6 +45,7 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::get('/{name}/followers', 'App\Http\Controllers\UserController@followers')->name('followers');
     Route::get('/{name}/edit', 'App\Http\Controllers\UserController@edit')->name('edit');
     Route::post('/{name}/edit','App\Http\Controllers\UserController@update')->name('update');
+    Route::get('/{name}/notice', 'App\Http\Controllers\UserController@notice')->name('notice');
     Route::middleware('auth')->group(function () {
         Route::put('/{name}/follow', 'App\Http\Controllers\UserController@follow')->name('follow');
         Route::delete('/{name}/follow', 'App\Http\Controllers\UserController@unfollow')->name('unfollow');
@@ -64,3 +65,5 @@ Route::group(['prefix' => 'chat', 'middleware' => 'auth'], function () {
 });
 
 Route::get('/setting', 'App\Http\Controllers\SetController@settings')->name('set.setting');
+
+Route::get('/notices','App\Http\Controllers\NoticeController@show')->name('notices.show');

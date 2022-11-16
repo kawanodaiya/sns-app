@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Status;
 use App\Models\StatusUser;
+use App\Models\Notice;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -129,9 +130,20 @@ class UserController extends Controller
             }
             $user->status()->sync($status_ids);
         }else{
-            return ["false"];
+            $notice = new Notice();
+            $notice->serve_user_id = $request->user()->id;
+            $notice->post_user_id = $request->user()->id;
+            $notice->message = "statusの作成に失敗しました。categoryに:は使うことができません。";
+            $notice->save();
+
+            return redirect('/');
         }
 
         return redirect('/');
+    }
+
+    public function notice()
+    {
+        return view('notices.show');
     }
 }
