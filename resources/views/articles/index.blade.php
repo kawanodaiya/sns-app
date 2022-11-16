@@ -4,9 +4,11 @@
 
 @section('content')
 
+<div class="fixed-top">
 @include('nav')
-<div class="container container-position">
-    @include('articles.select')
+@include('articles.select')
+</div>
+<div class="container select-container-position">
     @foreach($articles as $article)
     @include('articles.card')
     @endforeach

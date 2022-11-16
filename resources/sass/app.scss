@@ -35,7 +35,7 @@ $breakpoint-down: (
     }
 }
 
-.border-height{
+.border-height, .chat-height{
     height: calc(100vh - 55px);
 }
 
@@ -43,8 +43,24 @@ $breakpoint-down: (
     margin-top: 56px;
 }
 
+.select-container-position{
+    margin-top: 146px;
+}
+
+.card-container-position, .user-container-position, .chat-container-position{
+    margin-top: 80px;
+}
+
 .text-position{
     text-align: center;
+}
+
+.message-container{
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 14px;
+    height: calc(100vh - 188.5px);
+    overflow: scroll;
 }
 
 img{

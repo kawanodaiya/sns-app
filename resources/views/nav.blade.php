@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-dark bg-success fixed-top">
+<nav class="navbar navbar-expand navbar-dark bg-success">
 
     <a class="navbar-brand" href="/"><i class="fas fa-chess-board mx-1"></i>CAGE</a>
 
@@ -21,7 +21,7 @@
             <a class="nav-link" href="{{ route('articles.create') }}">
                 <div class="d-flex flex-row align-items-center">
                     <i class="fas fa-bell mr-1 fa-lg phone"></i>
-                    <p class="pc my-auto">通知</p>
+                    <p class="pc my-auto">お知らせ</p>
                 </div>
             </a>
         </li>

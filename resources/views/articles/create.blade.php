@@ -2,7 +2,9 @@
 
 @section('title', '記事投稿')
 
+<div class="fixed-top">
 @include('nav')
+</div>  
 
 @section('content')
 <div class="container container-position">

@@ -31,9 +31,9 @@
                 </select>
             </div>
         </div>
-        <div class="">
+        <div>
             <button type="submit" class="btn btn-block rounded-circle bg-success text-white ">
-            <i class="fab fa-sistrix"></i>
+                <i class="fab fa-sistrix"></i>
             </button>
         </div>
     </div>

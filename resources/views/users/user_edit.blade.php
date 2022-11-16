@@ -3,8 +3,12 @@
 @section('title', $user->name . 'の設定を編集')
 
 @section('content')
+
+<div class="fixed-top">
 @include('nav')
-<div class="container container-position">
+</div>
+
+<div class="container user-container-position">
     <form method="POST" action="{{ route('users.update',['name' => $user->name]) }}">
     @csrf
         <div class="user-name md-form pt-2">
@@ -15,12 +19,11 @@
         <div class="tag">
             <?php
                 $i = 0;
+                $will = 'will';
                 $now = 'now';
-                $comic = 'comic';
-                $movie = 'movie';
+                $delay = 'delay';
                 $start = 'start';
             ?>
-            <!-- ユーザーステータスで:が入っていた時の処理がされていない -->
             @if ($user->status()->exists())
             @foreach ($user->status as $status)
             <div class="d-flex flex-row">
@@ -30,12 +33,12 @@
                 </div>
                 <div class="form-group status">
                     <select name="status_name{{$i}}" class="form-control">
+                        <option style="margin-left: 5px;" value=":will"
+                        @if(Str::after($status->name, ':') == $will) selected @endif>:will</option>
                         <option style="margin-left: 5px;" value=":now"
                         @if(Str::after($status->name, ':') == $now) selected @endif>:now</option>
-                        <option style="margin-left: 5px;" value=":comic"
-                        @if(Str::after($status->name, ':') == $comic) selected @endif>:comic</option>
-                        <option style="margin-left: 5px;" value=":movie"
-                        @if(Str::after($status->name, ':') == $movie) selected @endif>:movie</option>
+                        <option style="margin-left: 5px;" value=":delay"
+                        @if(Str::after($status->name, ':') == $delay) selected @endif>:delay</option>
                         <option style="margin-left: 5px;" value=":start"
                         @if(Str::after($status->name, ':') == $start) selected @endif>:start</option>
                     </select>
@@ -55,8 +58,8 @@
                     <div class="form-group status">
                         <select name="status_name{{$i}}" class="form-control">
                             <option style="margin-left: 5px;" value=":now">:now</option>
-                            <option style="margin-left: 5px;" value=":comic">:comic</option>
-                            <option style="margin-left: 5px;" value=":movie">:movie</option>
+                            <option style="margin-left: 5px;" value=":will">:will</option>
+                            <option style="margin-left: 5px;" value=":delay">:delay</option>
                             <option style="margin-left: 5px;" value=":start">:start</option>
                         </select>
                     </div>
@@ -73,8 +76,8 @@
                 <div class="form-group status">
                     <select name="status_name{{$i}}" class="form-control">
                         <option style="margin-left: 5px;" value=":now">:now</option>
-                        <option style="margin-left: 5px;" value=":comic">:comic</option>
-                        <option style="margin-left: 5px;" value=":movie">:movie</option>
+                        <option style="margin-left: 5px;" value=":will">:will</option>
+                        <option style="margin-left: 5px;" value=":delay">:delay</option>
                         <option style="margin-left: 5px;" value=":start">:start</option>
                     </select>
                 </div>

@@ -37,29 +37,41 @@ class StatusController extends Controller
         
         $query = Article::query();
 
-        if ($status_name != null && $search_text == null) {
-            $result = $query->where('status_name', $status_name)->orderBy('created_at','desc')->get();
-        }elseif($status_name != null && $search_text != null){
-            $result = $query->where('status_name', $status_name)
+        if ($status_name != null) {
+            if ($search_text == null){
+                $result = $query->where('status_name', $status_name)->orderBy('created_at','desc')->get();
+            }else{
+                $result = $query->where('status_name', $status_name)
                         ->where(function($query)use($search_text,$search_text1){
                             $query->orWhere('title','like','%'.$search_text.'%')
                                 ->orWhere('body','like','%'.$search_text1.'%');
                         })->orderBy('created_at','desc')->get();
+            }
+        }elseif($status_name == null){
+            if ($search_text == null){
+                $result = $query->orderBy('created_at','desc')->get();
+            }else{
+                $result = $query->where(function($query)use($search_text,$search_text1){
+                        $query->orWhere('title','like','%'.$search_text.'%')
+                            ->orWhere('body','like','%'.$search_text1.'%');
+                        })->orderBy('created_at','desc')->get();
+            }
         }
 
         if ($status_name == "フォロー" && $search_text == null) {
             $user = User::where('name', $name)->first();
-            $result = Article::query()->whereIn('user_id',
-                    Auth::user()->followings()->pluck('followee_id'))
-                    ->orderBy('created_at','desc')->get();
-        }elseif ($status_name == "フォロー" && $search_text != null){
-            $user = User::where('name', $name)->first();
-            $result = Article::query()->whereIn('user_id',
-                    Auth::user()->followings()->pluck('followee_id'))
-                    ->where(function($query)use($search_text,$search_text1){
-                        $query->orWhere('title','like','%'.$search_text.'%')
-                            ->orWhere('body','like','%'.$search_text1.'%');
-                    })->orderBy('created_at','desc')->get();
+            if ($search_text == null){
+                $result = Article::query()->whereIn('user_id',
+                        Auth::user()->followings()->pluck('followee_id'))
+                        ->orderBy('created_at','desc')->get();
+            }else{
+                $result = Article::query()->whereIn('user_id',
+                        Auth::user()->followings()->pluck('followee_id'))
+                        ->where(function($query)use($search_text,$search_text1){
+                            $query->orWhere('title','like','%'.$search_text.'%')
+                                ->orWhere('body','like','%'.$search_text1.'%');
+                        })->orderBy('created_at','desc')->get();
+            }
         }
 
         return view('sorts.show',

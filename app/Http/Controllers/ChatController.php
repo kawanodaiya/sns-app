@@ -32,10 +32,8 @@ class ChatController extends Controller
     public static function show(Request $request){
     
         $user = $request->user();
-        //dd($user);
         $followings = $user->followings->pluck('id');
         $follow_each = $user->followers->whereIn('id',$followings)->sortByDesc('created_at');
-
         $follow_each_user_id = $request->user_id;
         
         // 自分の持っているチャットルームを取得
@@ -45,8 +43,7 @@ class ChatController extends Controller
         $chat_room_id = ChatRoomUser::whereIn('chat_room_id', $current_user_chat_rooms)
             ->where('user_id', $follow_each_user_id)
             ->pluck('chat_room_id');
-    
-    
+            
         // なければ作成する
         if ($chat_room_id->isEmpty()){
     

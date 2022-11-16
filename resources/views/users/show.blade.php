@@ -3,8 +3,10 @@
 @section('title', $user->name)
 
 @section('content')
+<div class="fixed-top">
 @include('nav')
-<div class="container container-position">
+</div>
+<div class="container user-container-position">
     @include('users.user')
     @include('users.tabs', ['hasArticles' => true, 'hasLikes' => false])
     @foreach($articles as $article)

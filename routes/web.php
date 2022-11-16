@@ -27,7 +27,7 @@ Route::prefix('login')->name('login.')->group(function () {
 });
 
 Route::get('/', 'App\Http\Controllers\ArticleController@index')->name('articles.index');
-//Route::get('/home', 'App\Http\Controllers\ArticleController@index')->name('articles.index');
+Route::get('/home', 'App\Http\Controllers\ArticleController@index')->name('articles.index');
 Route::resource('/articles', 'App\Http\Controllers\ArticleController')->except(['index','show'])
         ->middleware('auth');
 Route::resource('/articles', 'App\Http\Controllers\ArticleController')->only(['show']);  
@@ -51,7 +51,6 @@ Route::prefix('users')->name('users.')->group(function () {
     });
     Route::get('/{name}/statuses', 'App\Http\Controllers\StatusController@search')->name('statuses.search');
     Route::post('/{name}/statuses/sort', 'App\Http\Controllers\StatusController@sort')->name('statuses.sort');
-    //Route::get('/{name}/statuses/sort', 'App\Http\Controllers\StatusController@sort')->name('statuses.sort');
 });
 
 Route::post('/articles/{comment_id}/comments','App\Http\Controllers\CommentsController@store');

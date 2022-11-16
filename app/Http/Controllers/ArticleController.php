@@ -47,7 +47,7 @@ class ArticleController extends Controller
 
         // 画像フォームでリクエストした画像を取得
         $img = $request->file('img_path');
-        // storage > public > img配下に画像が保存される
+
         try{
             if($img){        
                 $dir = 'image';
@@ -100,7 +100,7 @@ class ArticleController extends Controller
 
         // 画像フォームでリクエストした画像を取得
         $img = $request->file('img_path');
-        // storage > public > img配下に画像が保存される
+
         if($img){        
             $dir = 'image';
             $file_name = $img->getClientOriginalName();

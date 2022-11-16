@@ -3,8 +3,12 @@
 @section('title', $user->name . 'のフォロワー')
 
 @section('content')
+
+<div class="fixed-top">
 @include('nav')
-<div class="container">
+</div>
+
+<div class="container user-container-position">
     @include('users.user')
     @include('users.tabs', ['hasArticles' => false, 'hasLikes' => false])
     @foreach($followers as $person)

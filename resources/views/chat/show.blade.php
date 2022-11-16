@@ -3,10 +3,14 @@
 @section('title', 'チャットルーム一覧')
 
 @section('content')
+
+<div class="fixed-top">
+@include('nav')
+</div>
+
 <div class="bg-white vh-100">
-    @include('nav')
     <div class="d-flex container-position">
-        <div class="user col-md-3">
+        <div class="user col-md-3 mt-3">
             @foreach($follow_each as $person)
                 @include('chat.user')
             @endforeach

@@ -113,7 +113,9 @@ class UserController extends Controller
                         $request->get('status2').$request->get('status_name2').','.
                         $request->get('status3').$request->get('status_name3').','.
                         $request->get('status4').$request->get('status_name4');
-        if (isset($input_status)) {
+        $status_check = substr_count($input_status, ":");
+
+        if ($status_check < 6) {
             $status_ids = [];
             $statuses = $input_status;
             $statuses = explode(',', $input_status);
@@ -126,6 +128,8 @@ class UserController extends Controller
                 $status_ids[] = $status->id;
             }
             $user->status()->sync($status_ids);
+        }else{
+            return ["false"];
         }
 
         return redirect('/');

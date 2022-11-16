@@ -2,10 +2,12 @@
 
 @section('title', '記事更新')
 
+<div class="fixed-top">
 @include('nav')
+</div>
 
 @section('content')
-<div class="container">
+<div class="container container-position">
     <div class="row">
         <div class="col-12">
             <div class="card mt-3">

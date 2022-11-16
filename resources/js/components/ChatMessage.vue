@@ -10,11 +10,32 @@
                 </button>
             </div>
         </div>
-        <ul>
+        <ul class="bg-light rounded message-container">
             <li v-for="(message, key) in messages" :key="key">
-                <div v-if="message.chat_room_id === chatRoomId">
-                    <strong>{{message.user.name}}</strong>
-                    {{ message.message }}
+                <div v-if="message.chat_room_id === chatRoomId" class="mb-3">
+
+                    <div v-if="message.user.name === partnerName">
+                        <div class="card border border-success shadow-0">
+                            <div class="card-body user-text">
+                                {{ message.message }}
+                            </div>
+                        </div>
+                        <div class="user-name">
+                            <strong>{{message.user.name}}</strong>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <div class="card border border-primary shadow-0">
+                            <div class="card-body user-text">
+                                {{ message.message }}
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row-reverse">
+                            <div class="user-name">
+                                <strong class="positon-right">{{message.user.name}}</strong>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </li>
         </ul>
@@ -25,6 +46,7 @@
 export default {
     props: {
         chatRoomId: String,
+        partnerName: String,
     },
     data() {
         return {
