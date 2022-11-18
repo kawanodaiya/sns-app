@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Comment;
 use App\Models\User;
 use App\Models\Follow;
+use App\Models\Notice;
 use App\Models\Status;
 use App\Models\StatusUser;
 use App\Http\Requests\ArticleRequest;
@@ -23,15 +24,16 @@ class ArticleController extends Controller
     
     public function index()
     {
-        $articles = Article::all()->sortByDesc('created_at')->load('user');
+        $articles = Article::all()->sortByDesc('created_at')->load(['user', 'likes', 'status']); 
         $statuses = Status::all();
         $user = Auth::user();
 
         try{
             if($statuses != null){
                 $articles = Article::query()->whereIn('status_name',
-                    Auth::user()->status()->pluck('name'))
-                    ->orderBy('created_at','desc')->get();
+                        Auth::user()->status()->pluck('name'))
+                        ->orderBy('created_at','desc')->get()
+                        ->load(['user', 'likes', 'status']);
             }
         }catch (\Exception $e){
             return view('articles.index',compact('articles','statuses','user'));
@@ -128,6 +130,13 @@ class ArticleController extends Controller
     {
         $article->likes()->detach($request->user()->id);
         $article->likes()->attach($request->user()->id);
+
+        $notice = new Notice();
+        $notice->serve_user_id = $article->user_id;
+        $notice->post_user_id = $request->user()->id;
+        $user_name = User::where('id', $notice->post_user_id)->first();
+        $notice->message = $user_name->name ."さんが投稿をいいねしました。";
+        $notice->save();
 
         return [
             'id' => $article->id,

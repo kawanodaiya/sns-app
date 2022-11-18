@@ -25,6 +25,11 @@ class Article extends Model
         return $this->belongsTo('App\Models\User');
     }
 
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo('App\Models\Status');
+    }
+
     public function likes(): BelongsToMany
     {
         return $this->belongsToMany('App\Models\User', 'likes')->withTimestamps();

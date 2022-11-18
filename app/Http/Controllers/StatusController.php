@@ -19,7 +19,7 @@ class StatusController extends Controller
 
     public function search(Request $request)
     {
-        $articles = Article::all()->sortByDesc('created_at');
+        $articles = Article::all()->sortByDesc('created_at')->load(['user', 'likes', 'status']);
         $statuses = Status::all();
         $user = Auth::user();
 
@@ -39,22 +39,27 @@ class StatusController extends Controller
 
         if ($status_name != null) {
             if ($search_text == null){
-                $result = $query->where('status_name', $status_name)->orderBy('created_at','desc')->get();
+                $result = $query->where('status_name', $status_name)
+                        ->orderBy('created_at','desc')->get()
+                        ->load(['user', 'likes', 'status']);
             }else{
                 $result = $query->where('status_name', $status_name)
                         ->where(function($query)use($search_text,$search_text1){
                             $query->orWhere('title','like','%'.$search_text.'%')
                                 ->orWhere('body','like','%'.$search_text1.'%');
-                        })->orderBy('created_at','desc')->get();
+                        })->orderBy('created_at','desc')->get()
+                        ->load(['user', 'likes', 'status']);
             }
         }elseif($status_name == null){
             if ($search_text == null){
-                $result = $query->orderBy('created_at','desc')->get();
+                $result = $query->orderBy('created_at','desc')->get()
+                        ->load(['user', 'likes', 'status']);
             }else{
                 $result = $query->where(function($query)use($search_text,$search_text1){
                         $query->orWhere('title','like','%'.$search_text.'%')
                             ->orWhere('body','like','%'.$search_text1.'%');
-                        })->orderBy('created_at','desc')->get();
+                        })->orderBy('created_at','desc')->get()
+                        ->load(['user', 'likes', 'status']);
             }
         }
 
@@ -63,14 +68,16 @@ class StatusController extends Controller
             if ($search_text == null){
                 $result = Article::query()->whereIn('user_id',
                         Auth::user()->followings()->pluck('followee_id'))
-                        ->orderBy('created_at','desc')->get();
+                        ->orderBy('created_at','desc')->get()
+                        ->load(['user', 'likes', 'status']);
             }else{
                 $result = Article::query()->whereIn('user_id',
                         Auth::user()->followings()->pluck('followee_id'))
                         ->where(function($query)use($search_text,$search_text1){
                             $query->orWhere('title','like','%'.$search_text.'%')
                                 ->orWhere('body','like','%'.$search_text1.'%');
-                        })->orderBy('created_at','desc')->get();
+                        })->orderBy('created_at','desc')->get()
+                        ->load(['user', 'likes', 'status']);
             }
         }
 

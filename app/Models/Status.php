@@ -14,4 +14,9 @@ class Status extends Model
     {
         return $this->belongsToMany('App\Models\User');
     }
+
+    public function articles()
+    {
+        return $this->hasMany('App\Models\article');
+    }
 }

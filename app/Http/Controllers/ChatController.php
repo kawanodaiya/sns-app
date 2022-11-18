@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Comment;
 use App\Models\User;
 use App\Models\Follow;
+use App\Models\Notice;
 use App\Models\Status;
 use App\Models\StatusUser;
 use App\Models\ChatRoom;
@@ -92,12 +93,22 @@ class ChatController extends Controller
     public function send(Request $request)
     {
         $user = Auth::user();
+        $serve_user_id = ChatRoomUser::where('chat_room_id', $request->chat_room_id)
+                            ->where('user_id', '!=', $request->user()->id)
+                            ->first();
 
         $chat = new ChatMessage();
         $chat->chat_room_id = $request->chat_room_id;
         $chat->user_id = $request->user()->id;
         $chat->message = $request->message;
         $chat->save();
+
+        $notice = new Notice();
+        $notice->serve_user_id = $serve_user_id->chat_room_id;
+        $notice->post_user_id = $request->user()->id;
+        $user_name = User::where('id', $notice->post_user_id)->first();
+        $notice->message = $user_name->name ."さんがチャットルームでコメントしました。";
+        $notice->save();
 
         $message = $chat->message;
         $chat_room_id = $chat->chat_room_id;

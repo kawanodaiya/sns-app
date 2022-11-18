@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div class="d-flex flex-row">
+    <div class="chat-body">
+        <div class="d-flex flex-row chat-form">
             <div class="w-100">
                 <input v-model="text" class="form-control" />
             </div>
@@ -12,7 +12,7 @@
         </div>
         <ul class="bg-light rounded message-container">
             <li v-for="(message, key) in messages" :key="key">
-                <div v-if="message.chat_room_id === chatRoomId" class="mb-3">
+                <div v-if="message.chat_room_id === chatRoomId" class="my-3">
 
                     <div v-if="message.user.name === partnerName">
                         <div class="card border border-success shadow-0">

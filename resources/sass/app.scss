@@ -24,15 +24,20 @@ $breakpoint-down: (
 
 .pc {
     display: block;
-    @include mq() { // 引数を省略（初期値はmdの768px）
+    @include mq() {
         display: none;
     }
 }
 
 .phone {
-    @include mq() { // 引数を省略（初期値はmdの768px）
+    @include mq() {
         margin-top: 3px;
     }
+}
+
+.user-scroll-type-phone{
+    overflow: scroll;
+    height: calc(100vh - 55px);
 }
 
 .border-height, .chat-height{
@@ -59,8 +64,12 @@ $breakpoint-down: (
     padding-left: 15px;
     padding-right: 15px;
     margin-top: 14px;
-    height: calc(100vh - 188.5px);
+    margin-bottom: 0px;
+    height: calc(100vh - 202.5px);
     overflow: scroll;
+    @include mq() {
+        height: calc(100vh - 240.5px);
+    }
 }
 
 img{

@@ -8,15 +8,16 @@
 @include('nav')
 </div>
 
-<div class="bg-white vh-100">
-    <div class="d-flex container-position">
-        <div class="user col-md-3 mt-3">
+<div class="d-flex container-position">
+    <div class = "user col-md-3 user-scroll-type-phone">
+        <ul class="mt-0 mb-0 pl-0">
             @foreach($follow_each as $person)
                 @include('chat.user')
             @endforeach
-        </div>
-        <div class="chat col-md-9">
-        </div>
+        </ul>
     </div>
+    <div class="border-end border-dark border-height pc"></div>
+    <div class="chat col-md-9 pc"></div>
 </div>
+
 @endsection

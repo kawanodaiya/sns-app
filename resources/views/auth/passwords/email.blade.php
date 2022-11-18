@@ -22,14 +22,13 @@
                     <div class="card-text">
                         <form method="POST" action="{{ route('password.email') }}">
                             @csrf
-
                             <div class="md-form">
                                 <label for="email">メールアドレス</label>
                                 <input class="form-control" type="text" id="email" name="email" required>
                             </div>
-
-                            <button class="btn btn-block bg-success text-white mt-2 mb-2" type="submit">メール送信</button>
-
+                            <button class="btn btn-block bg-success text-white mt-2 mb-2" type="submit">
+                                メール送信
+                            </button>
                         </form>
 
                     </div>

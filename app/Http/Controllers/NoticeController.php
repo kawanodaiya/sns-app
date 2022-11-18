@@ -9,6 +9,16 @@ class NoticeController extends Controller
 {
     public function show()
     {
-        return view('notices.show');
+        $notices = Notice::all()->sortByDesc('created_at');
+
+        return view('notices.show',compact('notices'));
+    }
+
+    public function destroy(Request $request)
+    {
+        $notice = Notice::find($request->id);
+        $notice->delete();
+
+        return redirect()->route('notices.show');
     }
 }

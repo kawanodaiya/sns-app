@@ -18,7 +18,7 @@
         
         @auth
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('articles.create') }}">
+            <a class="nav-link" href="{{ route('notices.show') }}">
                 <div class="d-flex flex-row align-items-center">
                     <i class="fas fa-bell mr-1 fa-lg phone"></i>
                     <p class="pc my-auto">お知らせ</p>
