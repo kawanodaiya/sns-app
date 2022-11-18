@@ -30,7 +30,7 @@
                                 メール送信
                             </button>
                         </form>
-
+                        <a href="{{ route('login') }}" class="card-text">戻る</a>
                     </div>
                 </div>
             </div>

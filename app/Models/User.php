@@ -57,7 +57,7 @@ class User extends Authenticatable
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new PasswordResetNotification($token, new BareMail()));
+        $this->notify(new ResetPassword($token));
     }
 
     public function articles(): HasMany
@@ -107,11 +107,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Comment');
     }
 
-    // public function chatMessages(): HasMany
-    // {
-    //     return $this->hasMany('App\Models\ChatMessage');
-    // }
-
     public function messages(): HasMany
     {
         return $this->hasMany('App\Models\ChatMessage');
@@ -120,5 +115,10 @@ class User extends Authenticatable
     public function chatRoomUsers(): HasMany
     {
         return $this->hasMany('App\Models\ChatRoomUser');
+    }
+
+    public function notices(): HasMany
+    {
+        return $this->hasMany('App\Models\Notice');
     }
 }

@@ -31,7 +31,7 @@ class ArticleController extends Controller
         try{
             if($statuses != null){
                 $articles = Article::query()->whereIn('status_name',
-                        Auth::user()->status()->pluck('name'))
+                        $user->status()->pluck('name'))
                         ->orderBy('created_at','desc')->get()
                         ->load(['user', 'likes', 'status']);
             }

@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PasswordController;
 
 Auth::routes();
 
-Route::get('/', 'App\Http\Controllers\ArticleController@index')->name('articles.index');
-Route::get('/home', 'App\Http\Controllers\ArticleController@index')->name('articles.index');
+Route::get('/', 'App\Http\Controllers\ArticleController@index')->name('articles.index')->middleware('auth');
 Route::resource('/articles', 'App\Http\Controllers\ArticleController')->except(['index','show'])
         ->middleware('auth');
 Route::resource('/articles', 'App\Http\Controllers\ArticleController')->only(['show']);  
@@ -45,11 +45,3 @@ Route::get('/setting', 'App\Http\Controllers\SetController@settings')->name('set
 
 Route::get('/notices','App\Http\Controllers\NoticeController@show')->name('notices.show');
 Route::post('/notices','App\Http\Controllers\NoticeController@destroy')->name('notices.destroy');
-
-//Route::post('password/reset/{token}', [ResetPasswordController::class, 'resetPassword']);
-
-//パスワードリセット
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset');
