@@ -22,5 +22,9 @@
         "laravel-echo": "^1.14.1",
         "pusher-js": "^7.4.0",
         "vue-template-compiler": "^2.7.10"
+    },
+    "engines": {
+        "node": "16.x",
+        "npm": "8.x"
     }
 }
