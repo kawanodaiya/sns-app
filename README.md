@@ -2,6 +2,8 @@
 ----------
 情報を求めている人のみと情報を共有し、欲しい情報のみを選択し共有することができるWebアプリケーションです
 URL:https://xs792433.xsrv.jp/
+<img width="1278" alt="スクリーンショット 2022-11-28 23 11 03" src="https://user-images.githubusercontent.com/117714925/204298804-a0bd2a2e-ff09-4deb-babb-44b7ae08ef9b.png">
+
 
 制作背景
 -------
@@ -55,8 +57,15 @@ DB設計
 記事投稿
 ---------
 
+https://user-images.githubusercontent.com/117714925/204301283-c6381795-cdf8-4f35-b842-e707343f8b47.mov
+
 記事検索
 ---------
 
+https://user-images.githubusercontent.com/117714925/204300944-bd70e2d5-3265-4592-8928-704fab417cc4.mov
+
 チャット機能
 ---------
+
+https://user-images.githubusercontent.com/117714925/204301992-25e84cb2-c3a0-4807-935d-e00629e5a9ae.mov
+
