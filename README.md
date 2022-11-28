@@ -28,9 +28,6 @@ URL:https://xs792433.xsrv.jp/
 
 ・MySQL
 
-DB設計
--------
-
 機能一覧
 --------
 
