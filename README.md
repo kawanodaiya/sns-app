@@ -20,11 +20,11 @@ URL:https://xs792433.xsrv.jp/
 
 ・Bootstrap
 
-・Vue.js
+・Vue.js ver3.2.37
 
-・PHP
+・PHP ver8.1.12
 
-・Laravel
+・Laravel ver9.30.1
 
 ・MySQL
 
